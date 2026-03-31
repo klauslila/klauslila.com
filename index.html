@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Klaus Oden — Civil Aviation Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#141414;--amber:#EF9F27;--amber-d:#D4882A;--teal:#1D9E75;--txt:#E8E8E8;--txt2:rgba(232,232,232,0.4);--txt3:rgba(232,232,232,0.35)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);min-height:100vh;font-family:'DM Sans',-apple-system,sans-serif;color:var(--txt);overflow-x:hidden}
+@keyframes glow{0%,100%{opacity:0.12}50%{opacity:0.2}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrapper{max-width:960px;margin:0 auto;padding:0 32px;position:relative}
+.section{padding:100px 0;position:relative;z-index:1}
+.divider{max-width:800px;margin:0 auto;height:1px;background:linear-gradient(to right,transparent,var(--teal),var(--amber),transparent);opacity:0.2;position:relative;z-index:1}
+.lg{background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));backdrop-filter:blur(40px) saturate(1.4);-webkit-backdrop-filter:blur(40px) saturate(1.4);border:1px solid rgba(255,255,255,0.12);border-radius:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 8px 32px rgba(0,0,0,0.3)}
+.lg-card{background:linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02));backdrop-filter:blur(30px) saturate(1.3);-webkit-backdrop-filter:blur(30px) saturate(1.3);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 4px 24px rgba(0,0,0,0.2);transition:border-color 0.3s,transform 0.3s}
+.lg-card:hover{border-color:rgba(255,255,255,0.18);transform:translateY(-2px)}
+.lg-card-a{background:linear-gradient(160deg,rgba(239,159,39,0.1),rgba(29,158,117,0.05),rgba(255,255,255,0.03));backdrop-filter:blur(30px) saturate(1.4);-webkit-backdrop-filter:blur(30px) saturate(1.4);border:1px solid rgba(239,159,39,0.18);border-radius:16px;padding:24px;box-shadow:inset 0 1px 0 rgba(239,159,39,0.1),0 4px 24px rgba(0,0,0,0.2);transition:border-color 0.3s,transform 0.3s}
+.lg-card-a:hover{border-color:rgba(239,159,39,0.3);transform:translateY(-2px)}
+.lg-pill{background:linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));backdrop-filter:blur(50px) saturate(1.5);-webkit-backdrop-filter:blur(50px) saturate(1.5);border:1px solid rgba(255,255,255,0.1);border-radius:50px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 4px 20px rgba(0,0,0,0.3)}
+.stat-ring{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid rgba(239,159,39,0.2);background:linear-gradient(135deg,rgba(29,158,117,0.06),rgba(239,159,39,0.04));box-shadow:0 0 30px rgba(239,159,39,0.06);transition:box-shadow 0.3s}
+.stat-ring:hover{box-shadow:0 0 40px rgba(239,159,39,0.12)}
+.grad-btn{background:linear-gradient(135deg,var(--amber),var(--amber-d));border:none;color:var(--bg);font-family:inherit;font-weight:500;font-size:14px;padding:14px 32px;border-radius:12px;box-shadow:0 4px 20px rgba(239,159,39,0.3);cursor:pointer;text-decoration:none;display:inline-block;transition:transform 0.2s,box-shadow 0.2s}
+.grad-btn:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(239,159,39,0.4)}
+.ghost-btn{border:1px solid rgba(29,158,117,0.3);color:var(--teal);font-family:inherit;font-weight:500;font-size:14px;padding:14px 32px;border-radius:12px;background:linear-gradient(135deg,rgba(29,158,117,0.06),rgba(29,158,117,0.02));cursor:pointer;text-decoration:none;display:inline-block;transition:border-color 0.2s}
+.ghost-btn:hover{border-color:rgba(29,158,117,0.5)}
+.grad-text{background:linear-gradient(135deg,var(--teal),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.shimmer-text{background:linear-gradient(90deg,var(--teal),var(--amber),var(--teal),var(--amber));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:4px;font-weight:500}
+.orb{position:absolute;pointer-events:none;border-radius:50%;z-index:0}
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column}
+#hero canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+#flight-tip{position:absolute;z-index:20;pointer-events:none;display:none;background:linear-gradient(160deg,rgba(20,20,20,0.92),rgba(10,10,10,0.95));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(239,159,39,0.25);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--txt);min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
+#flight-tip .tip-call{font-size:15px;font-weight:600;color:var(--amber);margin-bottom:6px}
+#flight-tip .tip-route{font-size:13px;color:var(--txt);margin-bottom:8px;letter-spacing:1px}
+#flight-tip .tip-row{display:flex;justify-content:space-between;gap:16px;margin-top:3px}
+#flight-tip .tip-label{color:var(--txt3);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+#flight-tip .tip-val{color:var(--txt);font-size:12px;font-weight:500;text-align:right}
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.cards-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section id="hero">
+<canvas id="map"></canvas>
+<div id="flight-tip"></div>
+<div style="position:absolute;bottom:0;left:0;right:0;height:250px;background:linear-gradient(to bottom,transparent,var(--bg));z-index:2;pointer-events:none"></div>
+<div style="position:absolute;top:0;left:0;right:0;height:80px;background:linear-gradient(to top,transparent,rgba(20,20,20,0.3));z-index:2;pointer-events:none"></div>
+<div class="orb" style="top:-200px;left:-150px;width:700px;height:700px;background:radial-gradient(circle,rgba(29,158,117,0.14) 0%,transparent 55%);animation:glow 6s ease-in-out infinite"></div>
+<div class="orb" style="top:-100px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(239,159,39,0.12) 0%,transparent 55%);animation:glow 6s ease-in-out infinite 3s"></div>
+
+<nav style="padding:16px 24px;position:relative;z-index:10">
+<div style="max-width:760px;margin:0 auto">
+<div class="lg-pill" style="padding:10px 24px;display:flex;align-items:center;justify-content:space-between">
+<a href="#" style="font-weight:600;font-size:14px;color:var(--amber);text-decoration:none">Klaus Oden</a>
+<div style="display:flex;align-items:center;gap:22px">
+<a href="#experience" style="font-size:12px;color:var(--txt);opacity:0.4;text-decoration:none">Experience</a>
+<a href="#certs" style="font-size:12px;color:var(--txt);opacity:0.4;text-decoration:none">Certifications</a>
+<a href="#contact" class="grad-btn" style="font-size:11px;padding:6px 18px;border-radius:50px;box-shadow:0 2px 12px rgba(239,159,39,0.3)">Contact</a>
+</div>
+</div>
+</div>
+</nav>
+
+<div style="position:relative;z-index:5;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 32px 60px;animation:fadeUp 1s ease-out">
+<div class="label" style="color:var(--teal);margin-bottom:18px">Civil Aviation Portfolio</div>
+<h1 style="font-size:48px;font-weight:600;line-height:1.12;margin:0">Precision.<br><span class="shimmer-text">Professionalism.</span><br>Performance.</h1>
+<p style="font-size:15px;color:var(--txt2);margin-top:26px;max-width:420px;line-height:1.7">8+ years in commercial aviation operations. Safety-driven. Detail-obsessed. Ready for the next challenge.</p>
+<div style="display:flex;gap:14px;margin-top:36px">
+<a href="#contact" class="grad-btn">Download CV</a>
+<a href="#experience" class="ghost-btn">View projects</a>
+</div>
+<div class="lg" style="max-width:480px;width:100%;margin-top:56px;padding:30px;animation:float 5s ease-in-out infinite;position:relative;overflow:hidden">
+<div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(29,158,117,0.08),rgba(239,159,39,0.06));pointer-events:none"></div>
+<div style="display:flex;justify-content:space-around;position:relative;z-index:1">
+<div style="text-align:center"><div class="grad-text" style="font-size:28px;font-weight:600">8+</div><div style="font-size:10px;opacity:0.4;margin-top:4px">Years</div></div>
+<div style="width:1px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.1),transparent)"></div>
+<div style="text-align:center"><div class="grad-text" style="font-size:28px;font-weight:600">12k+</div><div style="font-size:10px;opacity:0.4;margin-top:4px">Flight hours</div></div>
+<div style="width:1px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.1),transparent)"></div>
+<div style="text-align:center"><div class="grad-text" style="font-size:28px;font-weight:600">5</div><div style="font-size:10px;opacity:0.4;margin-top:4px">Aircraft types</div></div>
+<div style="width:1px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.1),transparent)"></div>
+<div style="text-align:center"><div class="grad-text" style="font-size:28px;font-weight:600">3</div><div style="font-size:10px;opacity:0.4;margin-top:4px">Certifications</div></div>
+</div>
+</div>
+</div>
+<div id="flight-status" style="position:absolute;bottom:20px;right:32px;z-index:6;font-size:11px;color:var(--txt2);letter-spacing:0.5px"></div>
+</section>
+
+<div class="divider"></div>
+<div class="orb" style="top:900px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(29,158,117,0.08) 0%,transparent 55%);animation:glow 8s ease-in-out infinite 2s"></div>
+<div class="orb" style="top:1300px;right:-80px;width:450px;height:450px;background:radial-gradient(circle,rgba(239,159,39,0.06) 0%,transparent 55%);animation:glow 7s ease-in-out infinite 4s"></div>
+
+<section id="experience" class="section">
+<div class="wrapper">
+<div style="text-align:center;margin-bottom:56px">
+<div class="label grad-text">Career trajectory</div>
+<h2 style="font-size:28px;font-weight:600;margin-top:10px">Built on <span class="grad-text">safety</span> and precision</h2>
+</div>
+<div class="cards-grid">
+<div class="lg-card-a"><div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(29,158,117,0.15),rgba(239,159,39,0.1));border:1px solid rgba(239,159,39,0.12);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);flex-shrink:0"><div style="width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--amber))"></div></div><div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:0.4">2020 – Present</div></div><h3 style="font-size:16px;font-weight:600;margin-bottom:8px">Senior Operations Officer</h3><p style="font-size:13px;color:var(--txt3);line-height:1.6">Airline Group · Leading safety operations across fleet management and regulatory compliance.</p></div>
+<div class="lg-card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:12px;height:12px;border-radius:50%;background:rgba(192,192,192,0.2)"></div></div><div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:0.4">2017 – 2020</div></div><h3 style="font-size:16px;font-weight:600;margin-bottom:8px">Flight Operations Analyst</h3><p style="font-size:13px;color:var(--txt3);line-height:1.6">Regional Airways · Data-driven operational analysis and route performance optimisation.</p></div>
+<div class="lg-card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:12px;height:12px;border-radius:50%;background:rgba(192,192,192,0.2)"></div></div><div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:0.4">2015 – 2017</div></div><h3 style="font-size:16px;font-weight:600;margin-bottom:8px">Safety &amp; Compliance Lead</h3><p style="font-size:13px;color:var(--txt3);line-height:1.6">Aviation Authority · SMS auditing and regulatory framework implementation.</p></div>
+<div class="lg-card-a"><div style="display:flex;align-items:center;gap:12px;margin-bottom:18px"><div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(29,158,117,0.15),rgba(239,159,39,0.1));border:1px solid rgba(239,159,39,0.12);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);flex-shrink:0"><div style="width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--amber))"></div></div><div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;opacity:0.4">2013 – 2015</div></div><h3 style="font-size:16px;font-weight:600;margin-bottom:8px">Ground Operations Coord.</h3><p style="font-size:13px;color:var(--txt3);line-height:1.6">Airport Services · Turnaround coordination and ground handling excellence.</p></div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+<section id="certs" class="section" style="text-align:center">
+<div class="wrapper">
+<div class="label grad-text">Qualifications</div>
+<h2 style="font-size:28px;font-weight:600;margin-top:10px;margin-bottom:56px">Industry <span class="shimmer-text">certified</span></h2>
+<div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap">
+<div><div class="stat-ring" style="margin:0 auto 14px;animation:float 4s ease-in-out infinite"><div class="grad-text" style="font-size:16px;font-weight:600">ATPL</div></div><div style="font-size:13px;font-weight:500">Airline Transport</div><div style="font-size:11px;opacity:0.3;margin-top:3px">Pilot License</div></div>
+<div><div class="stat-ring" style="margin:0 auto 14px;animation:float 4s ease-in-out infinite 1.3s"><div class="grad-text" style="font-size:16px;font-weight:600">SMS</div></div><div style="font-size:13px;font-weight:500">Safety Management</div><div style="font-size:11px;opacity:0.3;margin-top:3px">Systems Auditor</div></div>
+<div><div class="stat-ring" style="margin:0 auto 14px;animation:float 4s ease-in-out infinite 2.6s"><div class="grad-text" style="font-size:16px;font-weight:600">ICAO</div></div><div style="font-size:13px;font-weight:500">Dangerous Goods</div><div style="font-size:11px;opacity:0.3;margin-top:3px">Certified Handler</div></div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+<section id="contact" class="section" style="text-align:center;padding-bottom:60px">
+<div class="wrapper">
+<h2 style="font-size:32px;font-weight:600">Ready to <span class="shimmer-text">connect</span>?</h2>
+<p style="font-size:15px;color:var(--txt3);margin-top:16px;max-width:380px;margin-left:auto;margin-right:auto;line-height:1.7">Let's discuss how my experience can contribute to your aviation operations.</p>
+<div style="margin-top:36px"><a href="mailto:hello@example.com" class="grad-btn" style="font-size:15px;padding:16px 40px">Get in touch</a></div>
+</div>
+</section>
+
+<footer style="padding:24px 0;position:relative;z-index:1">
+<div class="wrapper">
+<div style="width:80px;height:2px;background:linear-gradient(to right,var(--teal),var(--amber));border-radius:1px;margin-bottom:14px;opacity:0.4"></div>
+<div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:rgba(128,128,128,0.5)">Klaus Oden — Civil Aviation Portfolio</span><span style="font-size:11px;color:rgba(128,128,128,0.5)">Sydney, Australia</span></div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3-array@3/dist/d3-array.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+(function(){
+
+var cv = document.getElementById('map');
+var ctx = cv.getContext('2d');
+var DPR = window.devicePixelRatio || 2;
+var W, H, proj, pathGen;
+
+function resize() {
+  W = cv.offsetWidth;
+  H = cv.offsetHeight;
+  cv.width = W * DPR;
+  cv.height = H * DPR;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  proj = d3.geoMercator()
+    .center([148, -29])
+    .scale(Math.min(W, H) * 1.15)
+    .translate([W * 0.4, H * 0.46]);
+  pathGen = d3.geoPath(proj, ctx);
+}
+resize();
+
+var landGeo = null;
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+  .then(function(r) { return r.json(); })
+  .then(function(topo) {
+    landGeo = topojson.feature(topo, topo.objects.countries);
+  })
+  .catch(function() {
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+      .then(function(r) { return r.json(); })
+      .then(function(topo) {
+        landGeo = topojson.feature(topo, topo.objects.countries);
+      }).catch(function() {});
+  });
+
+// Airports shown on map
+var airports = {
+  SYD: { lat: -33.95, lon: 151.18, main: true },
+  MEL: { lat: -37.67, lon: 144.84 },
+  BNE: { lat: -27.38, lon: 153.12 },
+  ADL: { lat: -34.94, lon: 138.53 },
+  PER: { lat: -31.94, lon: 115.97 },
+  AKL: { lat: -37.01, lon: 174.79 },
+  WLG: { lat: -41.33, lon: 174.81 },
+  CHC: { lat: -43.49, lon: 172.53 },
+  NOU: { lat: -22.01, lon: 166.22 },
+  HBA: { lat: -42.84, lon: 147.51 },
+  CNS: { lat: -16.88, lon: 145.76 },
+  DRW: { lat: -12.41, lon: 130.87 }
+};
+
+// Extended airport DB for route lines (not drawn on map)
+var airportDB = Object.assign({}, airports, {
+  // Australia
+  CBR:{lat:-35.31,lon:149.19}, OOL:{lat:-28.16,lon:153.50}, TSV:{lat:-19.25,lon:146.77},
+  ASP:{lat:-23.81,lon:133.90}, KTA:{lat:-20.71,lon:116.77}, BME:{lat:-17.95,lon:122.23},
+  LST:{lat:-41.55,lon:147.21}, MCY:{lat:-26.60,lon:153.09}, HTI:{lat:-20.36,lon:148.95},
+  AVV:{lat:-38.04,lon:144.47}, NTL:{lat:-32.79,lon:151.83}, PPP:{lat:-20.49,lon:148.55},
+  // New Zealand
+  ZQN:{lat:-45.02,lon:168.74}, DUD:{lat:-45.93,lon:170.20}, ROT:{lat:-38.11,lon:176.32},
+  NPE:{lat:-39.47,lon:176.87}, NPL:{lat:-39.01,lon:174.18}, PMR:{lat:-40.32,lon:175.62},
+  NSN:{lat:-41.30,lon:173.22}, BHE:{lat:-41.52,lon:173.87}, IVC:{lat:-46.41,lon:168.31},
+  TRG:{lat:-37.67,lon:176.20}, HLZ:{lat:-37.87,lon:175.33}, GIS:{lat:-38.66,lon:177.98},
+  // SE Asia
+  SIN:{lat:1.36,lon:103.99}, KUL:{lat:2.74,lon:101.70}, BKK:{lat:13.68,lon:100.75},
+  CGK:{lat:-6.13,lon:106.66}, DPS:{lat:-8.75,lon:115.17}, MNL:{lat:14.51,lon:121.02},
+  SGN:{lat:10.82,lon:106.65}, HAN:{lat:21.22,lon:105.81}, RGN:{lat:16.91,lon:96.13},
+  PNH:{lat:11.55,lon:104.84}, SUB:{lat:-7.38,lon:112.79},
+  // East Asia
+  HKG:{lat:22.31,lon:113.91}, PVG:{lat:31.14,lon:121.81}, PEK:{lat:40.08,lon:116.58},
+  NRT:{lat:35.76,lon:140.39}, HND:{lat:35.55,lon:139.78}, ICN:{lat:37.46,lon:126.44},
+  TPE:{lat:25.08,lon:121.23}, CAN:{lat:23.39,lon:113.30}, KIX:{lat:34.43,lon:135.24},
+  // South Asia / Middle East
+  DEL:{lat:28.57,lon:77.10}, BOM:{lat:19.09,lon:72.87}, CMB:{lat:7.18,lon:79.88},
+  DOH:{lat:25.26,lon:51.57}, DXB:{lat:25.25,lon:55.36}, AUH:{lat:24.43,lon:54.65},
+  JED:{lat:21.68,lon:39.16}, RUH:{lat:24.96,lon:46.70},
+  // Pacific
+  NAN:{lat:-17.76,lon:177.44}, SUV:{lat:-18.04,lon:177.44}, PPT:{lat:-17.56,lon:-149.61},
+  APW:{lat:-13.83,lon:-171.99}, TBU:{lat:-21.24,lon:-175.15}, VLI:{lat:-17.70,lon:168.32},
+  HIR:{lat:-9.43,lon:160.05}, POM:{lat:-6.01,lon:147.01}, RUN:{lat:-20.89,lon:55.51},
+  // Americas
+  LAX:{lat:33.94,lon:-118.41}, SFO:{lat:37.62,lon:-122.38}, DFW:{lat:32.90,lon:-97.04},
+  JFK:{lat:40.64,lon:-73.78}, YVR:{lat:49.19,lon:-123.18}, SCL:{lat:-33.39,lon:-70.79},
+  EZE:{lat:-34.82,lon:-58.54}, GRU:{lat:-23.43,lon:-46.47}, IAH:{lat:29.98,lon:-95.34},
+  // Europe
+  LHR:{lat:51.47,lon:-0.46}, CDG:{lat:49.01,lon:2.55}, FRA:{lat:50.03,lon:8.57},
+  AMS:{lat:52.31,lon:4.77}, FCO:{lat:41.80,lon:12.25}, MAD:{lat:40.47,lon:-3.57},
+  IST:{lat:41.26,lon:28.74}, ATH:{lat:37.94,lon:23.94}, ZRH:{lat:47.46,lon:8.55},
+  // Africa
+  JNB:{lat:-26.14,lon:28.25}, CPT:{lat:-33.96,lon:18.60}, NBO:{lat:-1.32,lon:36.93},
+  CAI:{lat:30.12,lon:31.41}, ADD:{lat:8.98,lon:38.80}, MRU:{lat:-20.43,lon:57.68}
+});
+
+function toXY(lon, lat) {
+  var p = proj([lon, lat]);
+  return p ? p : [0, 0];
+}
+
+// ============================================================
+// FLIGHT TRACKER — real data only, dead-reckoning between polls
+// ============================================================
+//
+// OpenSky state vector fields:
+//   [0] icao24        [5] longitude     [9]  velocity (m/s ground speed)
+//   [1] callsign      [6] latitude      [10] true_track (degrees clockwise from north)
+//   [7] baro_altitude  [8] on_ground
+//
+// Between API polls each aircraft's rendered position is advanced
+// every animation frame using its ground speed and true_track heading.
+// When a new poll arrives the position snaps to the fresh API data.
+
+var R_EARTH = 6371000; // metres
+
+// Advance a lat/lon by distance d (metres) along heading h (degrees CW from north)
+function moveLatLon(lat, lon, hdgDeg, distMetres) {
+  var d = distMetres / R_EARTH;
+  var h = hdgDeg * Math.PI / 180;
+  var lat1 = lat * Math.PI / 180;
+  var lon1 = lon * Math.PI / 180;
+  var sinLat1 = Math.sin(lat1);
+  var cosLat1 = Math.cos(lat1);
+  var sinD = Math.sin(d);
+  var cosD = Math.cos(d);
+  var lat2 = Math.asin(sinLat1 * cosD + cosLat1 * sinD * Math.cos(h));
+  var lon2 = lon1 + Math.atan2(Math.sin(h) * sinD * cosLat1, cosD - sinLat1 * Math.sin(lat2));
+  return { lat: lat2 * 180 / Math.PI, lon: lon2 * 180 / Math.PI };
+}
+
+// All tracked aircraft. Key = icao24 hex.
+// Each: { lat, lon, hdg, vel, alt, callsign, staleFrames }
+var planes = {};
+var visibleCount = 0;
+var pollOk = false;
+var pollError = false;
+
+// ============================================================
+// DATA SOURCE: Flightradar24 via JSONP (bypasses CORS entirely)
+// Works from file://, localhost, or any hosted domain.
+// Bounds: north_lat, south_lat, west_lon, east_lon
+// ============================================================
+
+var FR24_BOUNDS = '-10,-50,105,185'; // SE Australia + NZ + Pacific
+var POLL_MS = 3000;
+var lastPollTime = 0;
+
+function loadFlights() {
+  var qs = 'bounds=' + FR24_BOUNDS
+    + '&faa=1&satellite=1&mlat=1&adsb=1&gnd=0&air=1'
+    + '&vehicles=0&estimated=0&maxage=14400&gliders=0&stats=0';
+
+  fetch('/fr24?' + qs)
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(data) { ingestFR24(data); })
+    .catch(function(err) {
+      pollError = true;
+      console.warn('FR24:', err.message);
+    });
+}
+
+function ingestFR24(data) {
+  pollOk = true;
+  pollError = false;
+  var now = Date.now();
+  var seen = {};
+
+  var keys = Object.keys(data);
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    if (key === 'full_count' || key === 'version' || key === 'stats') continue;
+    var f = data[key];
+    if (!Array.isArray(f) || f.length < 15) continue;
+
+    // FR24 format: [icao, lat, lon, heading, alt_ft, speed_kts, squawk,
+    //   radar, type, reg, timestamp, origin, dest, flight, on_ground, vspeed, callsign, ?, airline]
+    var lat = f[1];
+    var lon = f[2];
+    var hdg = f[3];
+    var altFt = f[4];
+    var spdKts = f[5];
+    var onGround = f[14];
+
+    if (lat == null || lon == null || hdg == null) continue;
+    if (onGround === 1) continue;
+    var altM = (typeof altFt === 'number') ? altFt * 0.3048 : 10000;
+    if (altM < 300) continue;
+    if (altM < 2500 && isNearAirport(lat, lon)) continue;
+
+    seen[key] = true;
+    var existing = planes[key];
+    var trail = existing ? existing.trail : [];
+    // Record position for trail (keep last 60 points ~3 min at 3s polls)
+    trail.push([lat, lon]);
+    if (trail.length > 60) trail.shift();
+
+    planes[key] = {
+      lat: lat, lon: lon, hdg: hdg,
+      vel: (spdKts != null && spdKts > 0) ? spdKts * 0.5144 : 220,
+      alt: altM, altFt: altFt, spdKts: spdKts || 0,
+      type: (f[8] || '').toUpperCase(),
+      callsign: (f[16] || f[13] || '').trim(),
+      flight: (f[13] || '').trim(),
+      reg: (f[9] || '').trim(),
+      from: (f[11] || '').trim(),
+      to: (f[12] || '').trim(),
+      airline: (f[18] || '').trim(),
+      lastSeen: now,
+      trail: trail
+    };
+  }
+
+  // Prune aircraft gone for over 30s (missed ~4 polls)
+  var pkeys = Object.keys(planes);
+  for (var k = 0; k < pkeys.length; k++) {
+    if (now - planes[pkeys[k]].lastSeen > 30000) {
+      delete planes[pkeys[k]];
+    }
+  }
+}
+
+// Initial load + polling
+loadFlights();
+
+function pollFlights() {
+  var now = Date.now();
+  if (now - lastPollTime < POLL_MS) return;
+  lastPollTime = now;
+  loadFlights();
+}
+
+// ============================================================
+// DRAWING
+// ============================================================
+
+// Draw a plane icon pointing in hdgDeg direction (CW from north)
+// On a standard screen-space canvas where +x=right, +y=down:
+//   North (0°) = pointing up = -PI/2 in canvas radians
+//   The plane shape points right (east) at rotation=0,
+//   so we rotate by (hdg - 90) degrees.
+// Check if aircraft is near any airport (~25km radius)
+function isNearAirport(lat, lon) {
+  var codes = Object.keys(airports);
+  for (var i = 0; i < codes.length; i++) {
+    var ap = airports[codes[i]];
+    var dLat = lat - ap.lat;
+    var dLon = lon - ap.lon;
+    if (Math.abs(dLat) < 0.25 && Math.abs(dLon) < 0.25) return true;
+  }
+  return false;
+}
+
+// Classify aircraft size from altitude + speed
+// Returns: 'heavy' (A380/747/A340-size), 'large' (A330/777/767), 'medium' (A320/737)
+// Aircraft silhouettes from tar1090 (open-source ADS-B tracker, MIT license)
+// heavy_4e and heavy_2e on 64x64 grid, jet_swept on 18x24 grid
+var planeShapes = {
+  // 4-engine (A380, B747, A340) — engines integrated into wing shape
+  quad: new Path2D('m 30.764,3.957 c -1.030,1.995 -1.438,5.650 -1.600,7.687 -0.248,3.120 -0.114,5.478 -0.156,7.568 -0.016,0.798 -0.737,1.483 -1.435,2.163 l -4.630,4.207 c 0.136,-0.609 0.313,-2.735 0.011,-3.413 l -2.147,-0.067 c -0.337,0.636 -0.227,2.516 -0.102,3.486 l 0.414,0.033 0.179,1.447 -5.794,5.342 c 0.077,-0.914 0.114,-2.161 -0.105,-2.633 l -2.172,-0.078 c -0.367,0.716 -0.185,2.323 -0.053,3.475 h 0.394 l 0.138,0.949 -7.991,6.563 C 5.411,40.937 5.586,41.437 5.564,41.830 l -0.694,2.353 0.005,0.991 0.715,-1.236 10.464,-6.218 c 0.012,0.663 0.110,1.051 0.231,1.010 0.135,-0.045 0.328,-0.852 0.361,-1.290 l 2.274,-1.389 c -0.003,0.493 0.054,1.174 0.196,1.088 0.126,-0.076 0.384,-0.807 0.362,-1.370 l 1.528,-0.943 2.988,-1.018 c 0.073,0.381 0.122,0.929 0.292,0.896 0.159,-0.031 0.257,-0.491 0.355,-1.065 l 1.704,-0.597 c 0.025,0.437 0.163,0.976 0.297,0.914 0.149,-0.070 0.339,-0.647 0.356,-1.118 l 1.935,-0.666 0.054,10.106 c 0.183,3.800 0.173,5.797 0.919,9.127 -0.072,0.573 -0.374,0.766 -0.640,1.020 l -6.724,6.317 -0.007,2.046 8.553,-2.312 c 0.019,0.586 0.061,1.045 0.432,1.368 l 0.146,1.817 0.146,-1.817 c 0.371,-0.323 0.413,-0.782 0.432,-1.368 l 8.553,2.312 -0.007,-2.046 -6.724,-6.317 c -0.266,-0.253 -0.569,-0.446 -0.640,-1.020 0.747,-3.331 0.736,-5.327 0.919,-9.127 l 0.054,-10.106 1.935,0.666 c 0.017,0.470 0.207,1.048 0.356,1.118 0.134,0.062 0.272,-0.477 0.297,-0.914 l 1.704,0.597 c 0.098,0.574 0.196,1.034 0.355,1.065 0.170,0.033 0.219,-0.515 0.292,-0.896 l 2.988,1.018 1.528,0.943 c -0.021,0.563 0.237,1.294 0.362,1.370 0.141,0.086 0.198,-0.595 0.196,-1.088 l 2.274,1.389 c 0.033,0.439 0.227,1.245 0.361,1.290 0.121,0.041 0.219,-0.347 0.231,-1.010 l 10.464,6.218 0.715,1.236 0.005,-0.991 -0.694,-2.353 c -0.021,-0.393 0.153,-0.893 -0.151,-1.143 l -7.991,-6.563 0.138,-0.949 h 0.394 c 0.132,-1.152 0.314,-2.760 -0.053,-3.475 l -2.172,0.078 c -0.218,0.472 -0.182,1.719 -0.105,2.633 l -5.794,-5.342 0.179,-1.447 0.414,-0.033 c 0.125,-0.970 0.236,-2.850 -0.102,-3.486 l -2.147,0.067 c -0.302,0.678 -0.125,2.804 0.011,3.413 l -4.630,-4.207 c -0.698,-0.680 -1.419,-1.365 -1.435,-2.163 -0.042,-2.090 0.092,-4.448 -0.156,-7.568 -0.162,-2.037 -0.600,-5.677 -1.600,-7.687 -0.592,-1.190 -1.211,-1.157 -1.809,0 z'),
+  // Heavy twin-engine (B777, A330, B787) — with engine nacelles on wings
+  heavy: new Path2D('m 31.414,2.728 c -0.314,0.712 -1.296,2.377 -1.534,6.133 l -0.086,13.379 c 0.006,0.400 -0.380,0.888 -0.945,1.252 l -2.631,1.729 c 0.157,-0.904 0.237,-3.403 -0.162,-3.850 l -2.686,0.006 c -0.336,1.065 -0.358,2.518 -0.109,4.088 h 0.434 L 24.057,26.689 8.611,36.852 7.418,38.432 7.381,39.027 8.875,38.166 l 8.295,-2.771 0.072,0.730 0.156,-0.004 0.150,-0.859 3.799,-1.234 0.074,0.727 0.119,0.004 0.117,-0.832 2.182,-0.730 h 1.670 l 0.061,0.822 h 0.176 l 0.062,-0.822 4.018,-0.002 v 13.602 c 0.051,1.559 0.465,3.272 0.826,4.963 l -6.836,5.426 c -0.097,0.802 -0.003,1.372 0.049,1.885 l 7.734,-2.795 0.477,1.973 h 0.232 l 0.477,-1.973 7.736,2.795 c 0.052,-0.513 0.146,-1.083 0.049,-1.885 l -6.836,-5.426 c 0.361,-1.691 0.775,-3.404 0.826,-4.963 V 33.193 l 4.016,0.002 0.062,0.822 h 0.178 L 38.875,33.195 h 1.672 l 2.182,0.730 0.117,0.832 0.119,-0.004 0.072,-0.727 3.799,1.234 0.152,0.859 0.154,0.004 0.072,-0.730 8.297,2.771 1.492,0.861 -0.037,-0.596 -1.191,-1.580 -15.447,-10.162 0.363,-1.225 H 41.125 c 0.248,-1.569 0.225,-3.023 -0.111,-4.088 l -2.686,-0.006 c -0.399,0.447 -0.317,2.945 -0.160,3.850 L 35.535,23.492 C 34.970,23.128 34.584,22.640 34.590,22.240 L 34.504,8.910 C 34.193,4.926 33.369,3.602 32.934,2.722 32.442,1.732 31.894,1.828 31.414,2.728 Z'),
+  // Narrow-body jet (A320, B737) — jet_swept from tar1090
+  large: new Path2D('M9.44,23c-.1.6-.35.6-.44.6s-.34,0-.44-.6l-3,.67V22.6A.54.54,0,0,1,6,22.05l2.38-1.12L8,19.33H6.69l0-.2a8.23,8.23,0,0,1-.14-3.85l.06-.18H7.73V13.19h-2L.26,14.29v-.93c0-.28.07-.46.22-.53l7.25-3.6V3.85A4.47,4.47,0,0,1,8.83.49L9,.34l.17.15a4.47,4.47,0,0,1,1.1,3.36V9.23l7.25,3.6c.14.07.22.25.22.53v.93l-5.51-1.1h-2V15.1h1.17l.06.18a8.24,8.24,0,0,1-.15,3.84l0,.2H10l-.36,1.6,2.43,1.14a.52.52,0,0,1,.35.53v1.08Z'),
+  medium: new Path2D('M9.44,23c-.1.6-.35.6-.44.6s-.34,0-.44-.6l-3,.67V22.6A.54.54,0,0,1,6,22.05l2.38-1.12L8,19.33H6.69l0-.2a8.23,8.23,0,0,1-.14-3.85l.06-.18H7.73V13.19h-2L.26,14.29v-.93c0-.28.07-.46.22-.53l7.25-3.6V3.85A4.47,4.47,0,0,1,8.83.49L9,.34l.17.15a4.47,4.47,0,0,1,1.1,3.36V9.23l7.25,3.6c.14.07.22.25.22.53v.93l-5.51-1.1h-2V15.1h1.17l.06.18a8.24,8.24,0,0,1-.15,3.84l0,.2H10l-.36,1.6,2.43,1.14a.52.52,0,0,1,.35.53v1.08Z'),
+  // Single-engine turboprop (PC-12, Cessna Caravan) — 19x18 grid
+  turboprop: new Path2D('M 9.53,0.50 C 9.51,0.54 9.42,0.76 9.38,0.82 9.05,0.53 6.02,0.49 6.02,0.99 c 0.50,0 2.50,0.13 3.33,-0.08 C 8.52,1.63 8.53,3.51 8.23,6.47 L 1.33,7.00 C 0.50,7.07 0.50,7.57 0.50,8.44 L 5.97,9.39 C 6.71,9.58 8.12,10.04 8.12,10.04 c 0,0 0.29,4.81 0.82,6.26 l -2.91,0.67 c 0,0 -0.19,0.63 -0.19,1.20 l 3.54,0.23 0.08,0.11 0.08,-0.11 3.55,-0.20 c -0.00,-0.56 -0.18,-1.20 -0.18,-1.20 L 9.99,16.30 c 0.55,-1.44 0.88,-6.25 0.88,-6.25 0,0 1.41,-0.45 2.15,-0.63 l 5.48,-0.90 c 0.01,-0.87 0.01,-1.38 -0.81,-1.45 L 10.79,6.49 C 10.51,3.52 10.54,1.64 9.71,0.91 10.54,1.13 12.54,1.02 13.04,1.03 13.05,0.52 10.02,0.53 9.68,0.82 9.65,0.76 9.55,0.54 9.53,0.50 Z'),
+  // Twin-engine turboprop (Dash 8, ATR, King Air) — 19x16 grid
+  twinprop: new Path2D('M9.5,15.75c-.21,0-.34-.17-.41-.51l-2.88.23v-.27c0-.78,0-1.11.28-1.13L9,13.1c-.31-1.86-.55-5-.59-5.55l-.08-.09H6.08L.25,6.54v-1A.43.43,0,0,1,.67,5l3.75-.27L5,4.45V3.53H4.73V2.7a.35.35,0,0,1,.34-.35h.07c.12-.52.26-.83.54-.83s.42.31.53.83h.07a.35.35,0,0,1,.34.35v.83H6.36v1l2-.08C8.42.81,9.09.25,9.49.25s1.09.55,1.12,4.21l2,.08v-1h-.25V2.7a.35.35,0,0,1,.34-.35h.07c.12-.52.26-.83.53-.83s.42.31.54.83h.07a.35.35,0,0,1,.34.35v.83H14v.92l.57.32L18.32,5a.42.42,0,0,1,.43.46v1L13,7.46H10.71l-.08.09c0,.56-.27,3.68-.59,5.55l2.46,1c.28,0,.28.35.28,1.13v.27l-2.88-.23C9.84,15.58,9.71,15.75,9.5,15.75Z'),
+  // Helicopter from tar1090, 64x64 grid
+  heli: new Path2D('m 24.698,60.712 c 0,0 -0.450,2.134 -0.861,2.142 -0.561,0.011 -0.480,-3.836 -0.593,-5.761 -0.064,-1.098 1.381,-1.192 1.481,-0.042 l 5.464,0.007 -0.068,-9.482 -0.104,-1.108 c -2.410,-2.131 -3.028,-3.449 -3.152,-7.083 l -12.460,13.179 c -0.773,0.813 -2.977,0.599 -3.483,-0.428 L 26.920,35.416 26.866,29.159 11.471,14.513 c -0.813,-0.773 -0.599,-2.977 0.428,-3.483 l 14.971,14.428 0.150,-5.614 c -0.042,-1.324 1.075,-4.784 3.391,-5.633 0.686,-0.251 2.131,-0.293 3.033,0.008 2.349,0.783 3.433,4.309 3.391,5.633 l 0.073,4.400 12.573,-12.763 c 0.779,-0.807 2.977,-0.599 3.483,0.428 L 37.054,28.325 37.027,35.027 52.411,49.365 c 0.813,0.773 0.599,2.977 -0.428,3.483 L 36.992,38.359 c -0.124,3.634 -0.742,5.987 -3.152,8.118 l -0.104,1.108 -0.068,9.482 5.321,-0.068 c 0.101,-1.150 1.546,-1.057 1.481,0.042 -0.113,1.925 -0.032,5.772 -0.593,5.761 -0.412,-0.008 -0.861,-2.142 -0.861,-2.142 l -5.387,-0.011 0.085,9.377 -1.094,2.059 -1.386,-0.018 -1.093,-2.049 0.085,-9.377 z')
+};
+
+// Aircraft type classification
+var QUAD_TYPES = {
+  A380:1, A388:1, A389:1,
+  B744:1, B747:1, B748:1, B74S:1, B74R:1,
+  A340:1, A342:1, A343:1, A345:1, A346:1,
+  // 4-engine regional jets
+  B461:1, B462:1, B463:1, RJ1H:1, RJ70:1, RJ85:1, A124:1, C17:1
+};
+
+var NARROWBODY_TYPES = {
+  // Airbus A320 family
+  A318:1, A319:1, A320:1, A321:1, A20N:1, A21N:1,
+  // Boeing 737 family
+  B731:1, B732:1, B733:1, B734:1, B735:1, B736:1, B737:1, B738:1, B739:1,
+  B37M:1, B38M:1, B39M:1, B3XM:1,
+  // Boeing 757
+  B752:1, B753:1,
+  // Embraer E-Jets
+  E170:1, E175:1, E190:1, E195:1, E75L:1, E75S:1, E290:1, E295:1,
+  // Bombardier / Airbus C-Series
+  BCS1:1, BCS3:1, CS100:1, CS300:1,
+  // Sukhoi / COMAC / Tupolev
+  SU95:1, C919:1, T204:1,
+  // Boeing 717 / MD-80/90
+  B712:1, MD80:1, MD81:1, MD82:1, MD83:1, MD87:1, MD88:1, MD90:1,
+  // Business jets (narrow-body shape, small)
+  LJ35:1, LJ40:1, LJ45:1, LJ60:1, LJ70:1, LJ75:1,
+  CL30:1, CL35:1, CL60:1, GL5T:1, GL7T:1, GLEX:1,
+  C25A:1, C25B:1, C25C:1, C500:1, C510:1, C525:1, C550:1, C560:1, C56X:1, C680:1, C68A:1, C700:1, C750:1,
+  FA50:1, FA7X:1, FA8X:1, F900:1, F2TH:1,
+  G150:1, G200:1, G280:1, GLF4:1, GLF5:1, GLF6:1, GA5C:1, GA6C:1,
+  E35L:1, E45X:1, E50P:1, E55P:1,
+  H25B:1, H25C:1, HA4T:1, HDJT:1, EA50:1
+};
+
+var WIDEBODY_TYPES = {
+  // Airbus A330
+  A332:1, A333:1, A338:1, A339:1, A330:1,
+  // Airbus A350
+  A359:1, A35K:1, A350:1,
+  // Boeing 767
+  B762:1, B763:1, B764:1, B767:1,
+  // Boeing 777
+  B772:1, B773:1, B77L:1, B77W:1, B778:1, B779:1, B777:1,
+  // Boeing 787
+  B788:1, B789:1, B78X:1, B787:1,
+  // Others
+  A310:1, A300:1, DC10:1, MD11:1, L101:1, IL96:1, IL86:1
+};
+
+var SINGLE_PROP_TYPES = {
+  PC12:1, PC6:1, C208:1, C210:1, C206:1, C182:1, C172:1, C152:1,
+  P28A:1, P28B:1, P28R:1, P28S:1, P28T:1, PA32:1, PA34:1, PA31:1, PA46:1, PA44:1,
+  P46T:1, P180:1, TBM7:1, TBM8:1, TBM9:1, TBM:1, EPIC:1,
+  SR20:1, SR22:1, M20T:1, M20P:1, DA40:1, DA42:1, DA62:1,
+  BE33:1, BE35:1, BE36:1, A36:1, C177:1, M600:1,
+  KODI:1, C185:1, C180:1, DV20:1, SIRA:1, PIVI:1,
+  PC21:1, PC7:1, PC9:1, T6:1
+};
+
+var TWIN_PROP_TYPES = {
+  DH8A:1, DH8B:1, DH8C:1, DH8D:1, DHC6:1, DHC7:1,
+  AT43:1, AT44:1, AT45:1, AT46:1, AT72:1, AT73:1, AT75:1, AT76:1, ATR:1,
+  BE20:1, BE30:1, BE40:1, BE9L:1, B190:1, B350:1, B300:1, C441:1,
+  SW4:1, SF34:1, SH36:1, JS32:1, JS41:1, L410:1,
+  F27:1, F50:1, F60:1, AN24:1, AN26:1, AN12:1,
+  C130:1, C160:1, C27J:1, E120:1, D228:1, MA60:1,
+  PC24:1, MU2:1, G159:1, AC68:1, AC80:1, AC90:1
+};
+
+var HELI_TYPES = {
+  A109:1, A119:1, A139:1, A149:1, A169:1, AW09:1,
+  EC20:1, EC25:1, EC30:1, EC35:1, EC45:1, EC55:1, EC75:1,
+  H120:1, H125:1, H130:1, H135:1, H145:1, H155:1, H160:1, H175:1, H215:1, H225:1,
+  S76:1, S92:1, S70:1, S61:1, S64:1,
+  B06:1, B105:1, B212:1, B222:1, B230:1, B407:1, B412:1, B429:1, B505:1,
+  R22:1, R44:1, R66:1,
+  UH1:1, UH60:1, EH10:1, NH90:1, BK17:1,
+  B47G:1, B06T:1, AS50:1, AS55:1, AS65:1,
+  MI8:1, MI17:1, MI24:1, MI26:1, MI28:1, KA27:1, KA32:1, KA52:1,
+  MD52:1, MD60:1, LYNX:1, GAZL:1, PUMA:1, LAMA:1
+};
+
+function getShapeInfo(acType, alt, vel) {
+  if (HELI_TYPES[acType]) return { shape: 'heli', size: 16 };
+  if (SINGLE_PROP_TYPES[acType]) return { shape: 'turboprop', size: 12 };
+  if (TWIN_PROP_TYPES[acType]) return { shape: 'twinprop', size: 14 };
+  if (QUAD_TYPES[acType]) return { shape: 'quad', size: 24 };
+  if (WIDEBODY_TYPES[acType]) return { shape: 'heavy', size: 22 };
+  if (NARROWBODY_TYPES[acType]) return { shape: 'heavy', size: 16 };
+  // Fallback by altitude/speed for unknown types
+  if (alt > 11000 && vel > 240) return { shape: 'heavy', size: 20 };
+  if (alt > 9000 && vel > 220) return { shape: 'heavy', size: 16 };
+  return { shape: 'large', size: 14 };
+}
+
+function drawPlane(x, y, hdgDeg, acType, alt, vel) {
+  var ang = hdgDeg * Math.PI / 180;
+  var info = getShapeInfo(acType, alt, vel);
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(ang);
+  ctx.fillStyle = '#EF9F27';
+
+  if (info.shape === 'heli') {
+    var sc = info.size / 64;
+    ctx.scale(sc, sc);
+    ctx.translate(-32, -38);
+    ctx.fill(planeShapes.heli);
+  } else if (info.shape === 'turboprop') {
+    // single_turbo: ~19x18 grid, center ~(9.5, 9)
+    var sc = info.size / 19;
+    ctx.scale(sc, sc);
+    ctx.translate(-9.5, -9);
+    ctx.fill(planeShapes.turboprop);
+  } else if (info.shape === 'twinprop') {
+    // twin_small: ~19x16 grid, center ~(9.5, 8)
+    var sc = info.size / 19;
+    ctx.scale(sc, sc);
+    ctx.translate(-9.5, -8);
+    ctx.fill(planeShapes.twinprop);
+  } else if (info.shape === 'quad' || info.shape === 'heavy') {
+    // heavy_4e / heavy_2e: 64x64 grid, center ~(32,30)
+    var sc = info.size / 64;
+    ctx.scale(sc, sc);
+    ctx.translate(-32, -30);
+    ctx.fill(planeShapes[info.shape]);
+  } else {
+    // jet_swept: 18x24 grid, center ~(9,12)
+    var sc = info.size / 18;
+    ctx.scale(sc, sc);
+    ctx.translate(-9, -12);
+    ctx.fill(planeShapes.large);
+  }
+
+  ctx.restore();
+}
+
+function drawGrid() {
+  ctx.lineWidth = 0.5;
+  for (var lon = 110; lon <= 180; lon += 5) {
+    ctx.beginPath();
+    ctx.strokeStyle = (lon % 10 === 0) ? 'rgba(29,158,117,0.10)' : 'rgba(29,158,117,0.05)';
+    for (var la = -50; la <= -5; la += 0.5) {
+      var p = toXY(lon, la);
+      la === -50 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]);
+    }
+    ctx.stroke();
+  }
+  for (var lat = -10; lat >= -50; lat -= 5) {
+    ctx.beginPath();
+    ctx.strokeStyle = (lat % 10 === 0) ? 'rgba(29,158,117,0.10)' : 'rgba(29,158,117,0.05)';
+    for (var lo = 105; lo <= 185; lo += 0.5) {
+      var p2 = toXY(lo, lat);
+      lo === 105 ? ctx.moveTo(p2[0], p2[1]) : ctx.lineTo(p2[0], p2[1]);
+    }
+    ctx.stroke();
+  }
+}
+
+function drawLand() {
+  if (!landGeo) return;
+  ctx.beginPath();
+  pathGen(landGeo);
+  ctx.fillStyle = 'rgba(29,158,117,0.07)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(29,158,117,0.35)';
+  ctx.lineWidth = 1.2;
+  ctx.stroke();
+}
+
+function drawAirports() {
+  var codes = Object.keys(airports);
+  for (var i = 0; i < codes.length; i++) {
+    var code = codes[i];
+    var ap = airports[code];
+    var p = toXY(ap.lon, ap.lat);
+    if (p[0] < -50 || p[0] > W + 50 || p[1] < -50 || p[1] > H + 50) continue;
+    if (ap.main) {
+      ctx.beginPath(); ctx.arc(p[0], p[1], 18, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(239,159,39,0.05)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(p[0], p[1], 9, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(239,159,39,0.1)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(p[0], p[1], 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#EF9F27'; ctx.fill();
+    } else {
+      ctx.beginPath(); ctx.arc(p[0], p[1], 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(29,158,117,0.5)'; ctx.fill();
+    }
+    ctx.font = '500 9px "DM Sans",-apple-system,sans-serif';
+    ctx.fillStyle = ap.main ? 'rgba(239,159,39,0.6)' : 'rgba(192,192,192,0.3)';
+    ctx.textAlign = 'center';
+    ctx.fillText(code, p[0], p[1] - 12);
+  }
+}
+
+// ============================================================
+// HOVER / TOOLTIP
+// ============================================================
+
+var mouseX = -1, mouseY = -1;
+var hoveredKey = null;
+var tip = document.getElementById('flight-tip');
+
+var hero = document.getElementById('hero');
+hero.addEventListener('mousemove', function(e) {
+  var rect = cv.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
+});
+hero.addEventListener('mouseleave', function() {
+  mouseX = mouseY = -1;
+  hoveredKey = null;
+  tip.style.display = 'none';
+});
+
+function findHoveredPlane() {
+  if (mouseX < 0) { hoveredKey = null; return; }
+  var best = null, bestDist = 20; // 20px hit radius
+  var keys = Object.keys(planes);
+  for (var i = 0; i < keys.length; i++) {
+    var ac = planes[keys[i]];
+    var p = toXY(ac.lon, ac.lat);
+    var dx = p[0] - mouseX, dy = p[1] - mouseY;
+    var d = Math.sqrt(dx * dx + dy * dy);
+    if (d < bestDist) { bestDist = d; best = keys[i]; }
+  }
+  hoveredKey = best;
+}
+
+function updateTooltip() {
+  if (!hoveredKey || !planes[hoveredKey]) {
+    tip.style.display = 'none';
+    return;
+  }
+  var ac = planes[hoveredKey];
+  var route = '';
+  if (ac.from || ac.to) {
+    route = '<div class="tip-route">' + (ac.from || '???') + ' \u2708 ' + (ac.to || '???') + '</div>';
+  }
+  tip.innerHTML =
+    '<div class="tip-call">' + (ac.flight || ac.callsign || hoveredKey) + '</div>' +
+    route +
+    (ac.reg ? '<div style="font-size:10px;color:var(--txt3);margin-bottom:8px">' + ac.type + ' \u00B7 ' + ac.reg + '</div>' : '') +
+    '<div class="tip-row"><span class="tip-label">Altitude</span><span class="tip-val">' + (ac.altFt ? ac.altFt.toLocaleString() + ' ft' : 'N/A') + '</span></div>' +
+    '<div class="tip-row"><span class="tip-label">Speed</span><span class="tip-val">' + Math.round(ac.spdKts) + ' kts</span></div>' +
+    '<div class="tip-row"><span class="tip-label">Heading</span><span class="tip-val">' + Math.round(ac.hdg) + '\u00B0</span></div>';
+
+  tip.style.display = 'block';
+  // Position tooltip near mouse but keep on screen
+  var tx = mouseX + 20, ty = mouseY - 20;
+  var hRect = hero.getBoundingClientRect();
+  if (tx + 200 > hRect.width) tx = mouseX - 210;
+  if (ty < 10) ty = 10;
+  if (ty + 160 > hRect.height) ty = hRect.height - 170;
+  tip.style.left = tx + 'px';
+  tip.style.top = ty + 'px';
+}
+
+// Interpolate N points along a great circle between two lat/lon pairs
+function greatCirclePoints(lat1, lon1, lat2, lon2, n) {
+  var toRad = Math.PI / 180, toDeg = 180 / Math.PI;
+  var la1 = lat1 * toRad, lo1 = lon1 * toRad;
+  var la2 = lat2 * toRad, lo2 = lon2 * toRad;
+  var d = 2 * Math.asin(Math.sqrt(
+    Math.pow(Math.sin((la1 - la2) / 2), 2) +
+    Math.cos(la1) * Math.cos(la2) * Math.pow(Math.sin((lo1 - lo2) / 2), 2)
+  ));
+  if (d < 0.0001) return [[lat1, lon1], [lat2, lon2]];
+  var pts = [];
+  for (var i = 0; i <= n; i++) {
+    var f = i / n;
+    var A = Math.sin((1 - f) * d) / Math.sin(d);
+    var B = Math.sin(f * d) / Math.sin(d);
+    var x = A * Math.cos(la1) * Math.cos(lo1) + B * Math.cos(la2) * Math.cos(lo2);
+    var y = A * Math.cos(la1) * Math.sin(lo1) + B * Math.cos(la2) * Math.sin(lo2);
+    var z = A * Math.sin(la1) + B * Math.sin(la2);
+    pts.push([Math.atan2(z, Math.sqrt(x * x + y * y)) * toDeg, Math.atan2(y, x) * toDeg]);
+  }
+  return pts;
+}
+
+function drawTrail(ac) {
+  var fromAp = ac.from ? airportDB[ac.from] : null;
+  var toAp = ac.to ? airportDB[ac.to] : null;
+
+  // Draw full route as great circle arc
+  if (fromAp && toAp) {
+    // Origin → current position (solid, brighter)
+    var seg1 = greatCirclePoints(fromAp.lat, fromAp.lon, ac.lat, ac.lon, 40);
+    ctx.beginPath();
+    ctx.lineWidth = 1.8;
+    ctx.strokeStyle = 'rgba(239,159,39,0.35)';
+    for (var i = 0; i < seg1.length; i++) {
+      var p = toXY(seg1[i][1], seg1[i][0]);
+      i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]);
+    }
+    ctx.stroke();
+
+    // Current position → destination (dashed, dimmer)
+    var seg2 = greatCirclePoints(ac.lat, ac.lon, toAp.lat, toAp.lon, 40);
+    ctx.beginPath();
+    ctx.setLineDash([6, 8]);
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(239,159,39,0.2)';
+    for (var i = 0; i < seg2.length; i++) {
+      var p = toXY(seg2[i][1], seg2[i][0]);
+      i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Draw origin/destination dots
+    var pFrom = toXY(fromAp.lon, fromAp.lat);
+    var pTo = toXY(toAp.lon, toAp.lat);
+    ctx.beginPath(); ctx.arc(pFrom[0], pFrom[1], 4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(29,158,117,0.7)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(pTo[0], pTo[1], 4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(239,159,39,0.7)'; ctx.fill();
+
+    // Labels
+    ctx.font = '600 10px "DM Sans",-apple-system,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(29,158,117,0.8)';
+    ctx.fillText(ac.from, pFrom[0], pFrom[1] - 8);
+    ctx.fillStyle = 'rgba(239,159,39,0.8)';
+    ctx.fillText(ac.to, pTo[0], pTo[1] - 8);
+  } else {
+    // No route data — draw position trail + projected heading
+    if (ac.trail && ac.trail.length >= 2) {
+      var len = ac.trail.length;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      for (var i = 1; i < len; i++) {
+        var p0 = toXY(ac.trail[i - 1][1], ac.trail[i - 1][0]);
+        var p1 = toXY(ac.trail[i][1], ac.trail[i][0]);
+        var alpha = (i / len) * 0.6;
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(239,159,39,' + alpha.toFixed(2) + ')';
+        ctx.moveTo(p0[0], p0[1]);
+        ctx.lineTo(p1[0], p1[1]);
+        ctx.stroke();
+      }
+    }
+    // Projected heading
+    var last = toXY(ac.lon, ac.lat);
+    var fwd = moveLatLon(ac.lat, ac.lon, ac.hdg, ac.vel * 120);
+    var pFwd = toXY(fwd.lon, fwd.lat);
+    ctx.beginPath();
+    ctx.setLineDash([4, 6]);
+    ctx.strokeStyle = 'rgba(239,159,39,0.3)';
+    ctx.lineWidth = 1.5;
+    ctx.moveTo(last[0], last[1]);
+    ctx.lineTo(pFwd[0], pFwd[1]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+// ============================================================
+// MAIN LOOP
+// ============================================================
+
+var prevTime = performance.now();
+
+function frame(now) {
+  var dt = Math.min((now - prevTime) / 1000, 0.5);
+  prevTime = now;
+
+  pollFlights();
+  findHoveredPlane();
+
+  // Dead-reckon all planes
+  var keys = Object.keys(planes);
+  visibleCount = 0;
+  for (var i = 0; i < keys.length; i++) {
+    var ac = planes[keys[i]];
+    if (ac.vel > 0 && ac.hdg !== null) {
+      var dist = ac.vel * dt;
+      var np = moveLatLon(ac.lat, ac.lon, ac.hdg, dist);
+      ac.lat = np.lat;
+      ac.lon = np.lon;
+    }
+  }
+
+  // Clear and draw background
+  ctx.clearRect(0, 0, W, H);
+  try { drawGrid(); } catch(e) {}
+  try { drawLand(); } catch(e) {}
+  try { drawAirports(); } catch(e) {}
+
+  // Draw trail for hovered plane (behind all planes)
+  if (hoveredKey && planes[hoveredKey]) {
+    try { drawTrail(planes[hoveredKey]); } catch(e) {}
+  }
+
+  // Draw planes
+  for (var j = 0; j < keys.length; j++) {
+    try {
+      var ac2 = planes[keys[j]];
+      var p = toXY(ac2.lon, ac2.lat);
+      if (p[0] < -30 || p[0] > W + 30 || p[1] < -30 || p[1] > H + 30) continue;
+      visibleCount++;
+      var isHovered = (keys[j] === hoveredKey);
+      ctx.globalAlpha = isHovered ? 1.0 : 0.85;
+      drawPlane(p[0], p[1], ac2.hdg, ac2.type, ac2.alt, ac2.vel);
+      if (isHovered) {
+        // Highlight ring around hovered plane
+        ctx.beginPath();
+        ctx.arc(p[0], p[1], 14, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(239,159,39,0.5)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    } catch(e) { ctx.globalAlpha = 1; }
+  }
+
+  // Tooltip
+  updateTooltip();
+
+  // Status
+  var el = document.getElementById('flight-status');
+  if (pollOk) {
+    el.textContent = visibleCount + ' live aircraft \u00B7 Flightradar24';
+    el.style.color = 'rgba(29,158,117,0.6)';
+  } else if (pollError) {
+    el.textContent = 'Retrying flight data\u2026';
+    el.style.color = 'rgba(239,159,39,0.4)';
+  } else {
+    el.textContent = 'Connecting to flight data\u2026';
+    el.style.color = 'rgba(232,232,232,0.3)';
+  }
+
+  requestAnimationFrame(frame);
+}
+
+requestAnimationFrame(frame);
+window.addEventListener('resize', resize);
+
+})();
+</script>
+</body>
+</html>
