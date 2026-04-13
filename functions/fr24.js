@@ -18,7 +18,7 @@ export async function onRequest(context) {
       headers: {
         'Content-Type': 'application/json',
         'Cache-Control': 'public, max-age=2',
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'https://klauslila.com',
       },
     });
   } catch (e) {
