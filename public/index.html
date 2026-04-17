@@ -83,10 +83,12 @@ function resize() {
   cv.width = W * DPR;
   cv.height = H * DPR;
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  var sc = (W > H) ? H * 1.1 : H * 0.85;
   proj = d3.geoMercator()
-    .center([148, -29])
-    .scale(Math.min(W, H) * 1.15)
-    .translate([W * 0.4, H * 0.46]);
+    .rotate([-151, 0])
+    .center([0, -29])
+    .scale(sc)
+    .translate([W * 0.5, H * 0.5]);
   pathGen = d3.geoPath(proj, ctx);
 }
 resize();
@@ -128,6 +130,10 @@ var airportDB = Object.assign({}, airports, {
   ASP:{lat:-23.81,lon:133.90}, KTA:{lat:-20.71,lon:116.77}, BME:{lat:-17.95,lon:122.23},
   LST:{lat:-41.55,lon:147.21}, MCY:{lat:-26.60,lon:153.09}, HTI:{lat:-20.36,lon:148.95},
   AVV:{lat:-38.04,lon:144.47}, NTL:{lat:-32.79,lon:151.83}, PPP:{lat:-20.49,lon:148.55},
+  ARM:{lat:-30.53,lon:151.62}, ABX:{lat:-36.07,lon:146.96}, BDB:{lat:-24.91,lon:152.32},
+  CFS:{lat:-30.32,lon:153.12}, GLT:{lat:-23.87,lon:151.22}, ISA:{lat:-20.66,lon:139.49},
+  MKY:{lat:-21.17,lon:149.18}, ROK:{lat:-23.38,lon:150.48}, WGA:{lat:-35.16,lon:147.47},
+  PHE:{lat:-22.69,lon:118.63}, LEA:{lat:-22.24,lon:114.09}, KGI:{lat:-30.79,lon:121.46},
   // New Zealand
   ZQN:{lat:-45.02,lon:168.74}, DUD:{lat:-45.93,lon:170.20}, ROT:{lat:-38.11,lon:176.32},
   NPE:{lat:-39.47,lon:176.87}, NPL:{lat:-39.01,lon:174.18}, PMR:{lat:-40.32,lon:175.62},
@@ -137,30 +143,129 @@ var airportDB = Object.assign({}, airports, {
   SIN:{lat:1.36,lon:103.99}, KUL:{lat:2.74,lon:101.70}, BKK:{lat:13.68,lon:100.75},
   CGK:{lat:-6.13,lon:106.66}, DPS:{lat:-8.75,lon:115.17}, MNL:{lat:14.51,lon:121.02},
   SGN:{lat:10.82,lon:106.65}, HAN:{lat:21.22,lon:105.81}, RGN:{lat:16.91,lon:96.13},
-  PNH:{lat:11.55,lon:104.84}, SUB:{lat:-7.38,lon:112.79},
+  PNH:{lat:11.55,lon:104.84}, SUB:{lat:-7.38,lon:112.79}, DAD:{lat:16.04,lon:108.20},
+  CEB:{lat:10.31,lon:123.98}, PEN:{lat:5.30,lon:100.28}, LGK:{lat:6.33,lon:99.73},
+  KBR:{lat:6.17,lon:102.29}, BKI:{lat:5.94,lon:116.05}, KCH:{lat:1.48,lon:110.35},
+  REP:{lat:13.41,lon:103.81}, VTE:{lat:17.99,lon:102.56}, CNX:{lat:18.77,lon:98.96},
+  HKT:{lat:8.11,lon:98.32}, USM:{lat:9.55,lon:100.06}, DMK:{lat:13.91,lon:100.61},
+  CRK:{lat:15.19,lon:120.56}, UPG:{lat:-5.06,lon:119.55}, MDC:{lat:1.55,lon:124.93},
+  BTJ:{lat:5.52,lon:95.42}, PLM:{lat:-2.90,lon:104.70}, BPN:{lat:-1.27,lon:116.89},
+  JOG:{lat:-7.79,lon:110.43}, SRG:{lat:-6.97,lon:110.37}, SOC:{lat:-7.52,lon:110.76},
   // East Asia
   HKG:{lat:22.31,lon:113.91}, PVG:{lat:31.14,lon:121.81}, PEK:{lat:40.08,lon:116.58},
   NRT:{lat:35.76,lon:140.39}, HND:{lat:35.55,lon:139.78}, ICN:{lat:37.46,lon:126.44},
   TPE:{lat:25.08,lon:121.23}, CAN:{lat:23.39,lon:113.30}, KIX:{lat:34.43,lon:135.24},
-  // South Asia / Middle East
+  PKX:{lat:39.51,lon:116.41}, CTU:{lat:30.57,lon:103.95}, CKG:{lat:29.72,lon:106.64},
+  SZX:{lat:22.64,lon:113.81}, XIY:{lat:34.44,lon:108.75}, KMG:{lat:24.99,lon:102.74},
+  HGH:{lat:30.23,lon:120.43}, NKG:{lat:31.74,lon:118.86}, WUH:{lat:30.78,lon:114.21},
+  TAO:{lat:36.27,lon:120.37}, TSN:{lat:39.12,lon:117.35}, SHE:{lat:41.64,lon:123.48},
+  DLC:{lat:38.97,lon:121.54}, CSX:{lat:28.19,lon:113.22}, XMN:{lat:24.54,lon:118.13},
+  FOC:{lat:25.94,lon:119.66}, HAK:{lat:19.93,lon:110.46}, SYX:{lat:18.30,lon:109.41},
+  NGO:{lat:34.86,lon:136.81}, FUK:{lat:33.59,lon:130.45}, CTS:{lat:42.77,lon:141.69},
+  OKA:{lat:26.20,lon:127.65}, ITM:{lat:34.79,lon:135.44}, GMP:{lat:37.56,lon:126.79},
+  PUS:{lat:35.18,lon:128.94}, CJU:{lat:33.51,lon:126.49}, KHH:{lat:22.58,lon:120.35},
+  RMQ:{lat:24.26,lon:120.62}, MFM:{lat:22.15,lon:113.59}, ULN:{lat:47.84,lon:106.77},
+  // South Asia
   DEL:{lat:28.57,lon:77.10}, BOM:{lat:19.09,lon:72.87}, CMB:{lat:7.18,lon:79.88},
+  BLR:{lat:13.20,lon:77.71}, MAA:{lat:12.99,lon:80.17}, CCU:{lat:22.65,lon:88.45},
+  HYD:{lat:17.24,lon:78.43}, COK:{lat:10.15,lon:76.40}, TRV:{lat:8.48,lon:76.92},
+  AMD:{lat:23.07,lon:72.63}, GOI:{lat:15.38,lon:73.83}, JAI:{lat:26.82,lon:75.81},
+  LKO:{lat:26.76,lon:80.89}, GAU:{lat:26.11,lon:91.59}, IXC:{lat:30.67,lon:76.79},
+  DAC:{lat:23.84,lon:90.40}, CGP:{lat:22.25,lon:91.81}, KTM:{lat:27.70,lon:85.36},
+  ISB:{lat:33.62,lon:73.10}, KHI:{lat:24.91,lon:67.16}, LHE:{lat:31.52,lon:74.40},
+  MLE:{lat:4.19,lon:73.53},
+  // Middle East
   DOH:{lat:25.26,lon:51.57}, DXB:{lat:25.25,lon:55.36}, AUH:{lat:24.43,lon:54.65},
-  JED:{lat:21.68,lon:39.16}, RUH:{lat:24.96,lon:46.70},
-  // Pacific
+  JED:{lat:21.68,lon:39.16}, RUH:{lat:24.96,lon:46.70}, MCT:{lat:23.59,lon:58.28},
+  BAH:{lat:26.27,lon:50.64}, KWI:{lat:29.23,lon:47.97}, AMM:{lat:31.72,lon:35.99},
+  BEY:{lat:33.82,lon:35.49}, TLV:{lat:32.01,lon:34.89}, DMM:{lat:26.47,lon:49.80},
+  MED:{lat:24.55,lon:39.71}, SHJ:{lat:25.33,lon:55.52}, DWC:{lat:24.90,lon:55.16},
+  THR:{lat:35.69,lon:51.31}, IKA:{lat:35.42,lon:51.15}, ISF:{lat:32.75,lon:51.86},
+  BGW:{lat:33.26,lon:44.23}, EBL:{lat:36.24,lon:43.96}, BSR:{lat:30.55,lon:47.66},
+  // Pacific / Hawaii
+  HNL:{lat:21.32,lon:-157.92}, OGG:{lat:20.90,lon:-156.43}, KOA:{lat:19.74,lon:-156.05},
+  LIH:{lat:21.98,lon:-159.34}, GUM:{lat:13.48,lon:144.80}, SPN:{lat:15.12,lon:145.73},
+  PPG:{lat:-14.33,lon:-170.71}, RAR:{lat:-21.20,lon:-159.81},
   NAN:{lat:-17.76,lon:177.44}, SUV:{lat:-18.04,lon:177.44}, PPT:{lat:-17.56,lon:-149.61},
   APW:{lat:-13.83,lon:-171.99}, TBU:{lat:-21.24,lon:-175.15}, VLI:{lat:-17.70,lon:168.32},
   HIR:{lat:-9.43,lon:160.05}, POM:{lat:-6.01,lon:147.01}, RUN:{lat:-20.89,lon:55.51},
-  // Americas
+  NOU:{lat:-22.01,lon:166.22}, WLS:{lat:-13.24,lon:-176.20}, FUN:{lat:-8.52,lon:179.20},
+  TRW:{lat:1.38,lon:173.15}, MAJ:{lat:7.06,lon:171.27}, KSA:{lat:5.36,lon:162.96},
+  LAE:{lat:-6.57,lon:147.00}, MNJ:{lat:-21.20,lon:48.36},
+  // North America
   LAX:{lat:33.94,lon:-118.41}, SFO:{lat:37.62,lon:-122.38}, DFW:{lat:32.90,lon:-97.04},
-  JFK:{lat:40.64,lon:-73.78}, YVR:{lat:49.19,lon:-123.18}, SCL:{lat:-33.39,lon:-70.79},
-  EZE:{lat:-34.82,lon:-58.54}, GRU:{lat:-23.43,lon:-46.47}, IAH:{lat:29.98,lon:-95.34},
+  JFK:{lat:40.64,lon:-73.78}, YVR:{lat:49.19,lon:-123.18}, IAH:{lat:29.98,lon:-95.34},
+  ORD:{lat:41.98,lon:-87.90}, SEA:{lat:47.45,lon:-122.31}, ATL:{lat:33.64,lon:-84.43},
+  MIA:{lat:25.79,lon:-80.29}, BOS:{lat:42.36,lon:-71.01}, EWR:{lat:40.69,lon:-74.17},
+  IAD:{lat:38.95,lon:-77.46}, MSP:{lat:44.88,lon:-93.22}, DEN:{lat:39.86,lon:-104.67},
+  PHX:{lat:33.43,lon:-112.01}, LAS:{lat:36.08,lon:-115.15}, SAN:{lat:32.73,lon:-117.19},
+  PDX:{lat:45.59,lon:-122.59}, MEX:{lat:19.44,lon:-99.07}, YYZ:{lat:43.68,lon:-79.63},
+  YUL:{lat:45.47,lon:-73.74}, DTW:{lat:42.21,lon:-83.35}, CLT:{lat:35.21,lon:-80.94},
+  MCO:{lat:28.43,lon:-81.31}, FLL:{lat:26.07,lon:-80.15}, TPA:{lat:27.98,lon:-82.53},
+  PHL:{lat:39.87,lon:-75.24}, DCA:{lat:38.85,lon:-77.04}, BWI:{lat:39.18,lon:-76.67},
+  SLC:{lat:40.79,lon:-111.98}, ANC:{lat:61.17,lon:-150.00}, SMF:{lat:38.70,lon:-121.59},
+  SJC:{lat:37.36,lon:-121.93}, OAK:{lat:37.72,lon:-122.22}, BNA:{lat:36.13,lon:-86.68},
+  AUS:{lat:30.19,lon:-97.67}, SAT:{lat:29.53,lon:-98.47}, RDU:{lat:35.88,lon:-78.79},
+  IND:{lat:39.72,lon:-86.29}, MCI:{lat:39.30,lon:-94.71}, STL:{lat:38.75,lon:-90.37},
+  PIT:{lat:40.49,lon:-80.23}, CLE:{lat:41.41,lon:-81.85}, CMH:{lat:39.99,lon:-82.89},
+  MKE:{lat:42.95,lon:-87.90}, CVG:{lat:39.05,lon:-84.66}, BDL:{lat:41.94,lon:-72.68},
+  JAX:{lat:30.49,lon:-81.69}, RIC:{lat:37.51,lon:-77.32}, BUF:{lat:42.94,lon:-78.73},
+  ABQ:{lat:35.04,lon:-106.61}, OKC:{lat:35.39,lon:-97.60}, TUS:{lat:32.12,lon:-110.94},
+  ONT:{lat:34.06,lon:-117.60}, BUR:{lat:34.20,lon:-118.36}, LGB:{lat:33.82,lon:-118.15},
+  CUN:{lat:21.04,lon:-86.88}, GDL:{lat:20.52,lon:-103.31}, MTY:{lat:25.78,lon:-100.11},
+  SJD:{lat:23.15,lon:-109.72}, PVR:{lat:20.68,lon:-105.25}, TIJ:{lat:32.54,lon:-116.97},
+  YYC:{lat:51.13,lon:-114.02}, YEG:{lat:53.31,lon:-113.58}, YOW:{lat:45.32,lon:-75.67},
+  YWG:{lat:49.91,lon:-97.24}, YHZ:{lat:44.88,lon:-63.51}, YQB:{lat:46.79,lon:-71.39},
+  YVR:{lat:49.19,lon:-123.18}, YXE:{lat:52.17,lon:-106.70}, YQR:{lat:50.43,lon:-104.67},
+  // Central America / Caribbean
+  PTY:{lat:9.07,lon:-79.38}, SJO:{lat:9.99,lon:-84.21}, SAL:{lat:13.44,lon:-89.06},
+  GUA:{lat:14.58,lon:-90.53}, BZE:{lat:17.54,lon:-88.31}, MBJ:{lat:18.50,lon:-77.91},
+  NAS:{lat:25.04,lon:-77.47}, KIN:{lat:17.94,lon:-76.79}, POS:{lat:10.60,lon:-61.34},
+  BGI:{lat:13.07,lon:-59.49}, AUA:{lat:12.50,lon:-70.02}, CUR:{lat:12.19,lon:-68.96},
+  SXM:{lat:18.04,lon:-63.11}, PUJ:{lat:18.57,lon:-68.36}, SDQ:{lat:18.43,lon:-69.67},
+  HAV:{lat:22.99,lon:-82.41}, SJU:{lat:18.44,lon:-66.00},
+  // South America
+  SCL:{lat:-33.39,lon:-70.79}, EZE:{lat:-34.82,lon:-58.54}, GRU:{lat:-23.43,lon:-46.47},
+  LIM:{lat:-12.02,lon:-77.11}, BOG:{lat:4.70,lon:-74.15}, GIG:{lat:-22.81,lon:-43.25},
+  BSB:{lat:-15.87,lon:-47.92}, CNF:{lat:-19.63,lon:-43.97}, SSA:{lat:-12.91,lon:-38.33},
+  REC:{lat:-8.13,lon:-34.92}, FOR:{lat:-3.78,lon:-38.53}, POA:{lat:-29.99,lon:-51.17},
+  CWB:{lat:-25.53,lon:-49.17}, VCP:{lat:-23.01,lon:-47.13}, MVD:{lat:-34.84,lon:-56.03},
+  ASU:{lat:-25.24,lon:-57.52}, UIO:{lat:-0.13,lon:-78.36}, CCS:{lat:10.60,lon:-66.99},
+  MDE:{lat:6.16,lon:-75.43}, CLO:{lat:3.54,lon:-76.38}, CTG:{lat:10.44,lon:-75.51},
+  LPB:{lat:-16.51,lon:-68.19}, VVI:{lat:-17.64,lon:-63.14}, CUZ:{lat:-13.54,lon:-71.94},
   // Europe
   LHR:{lat:51.47,lon:-0.46}, CDG:{lat:49.01,lon:2.55}, FRA:{lat:50.03,lon:8.57},
   AMS:{lat:52.31,lon:4.77}, FCO:{lat:41.80,lon:12.25}, MAD:{lat:40.47,lon:-3.57},
   IST:{lat:41.26,lon:28.74}, ATH:{lat:37.94,lon:23.94}, ZRH:{lat:47.46,lon:8.55},
+  MUC:{lat:48.35,lon:11.79}, BCN:{lat:41.30,lon:2.08}, LGW:{lat:51.15,lon:-0.18},
+  STN:{lat:51.88,lon:0.23}, LTN:{lat:51.87,lon:-0.37}, MAN:{lat:53.35,lon:-2.27},
+  EDI:{lat:55.95,lon:-3.37}, DUB:{lat:53.42,lon:-6.27}, ORY:{lat:48.72,lon:2.37},
+  BRU:{lat:50.90,lon:4.48}, VIE:{lat:48.11,lon:16.57}, CPH:{lat:55.62,lon:12.66},
+  OSL:{lat:60.19,lon:11.10}, ARN:{lat:59.65,lon:17.94}, HEL:{lat:60.32,lon:24.97},
+  LIS:{lat:38.77,lon:-9.14}, OPO:{lat:41.24,lon:-8.68}, MXP:{lat:45.63,lon:8.72},
+  NAP:{lat:40.89,lon:14.29}, VCE:{lat:45.51,lon:12.35}, BLQ:{lat:44.53,lon:11.29},
+  PMI:{lat:39.55,lon:2.74}, AGP:{lat:36.68,lon:-4.50}, ALC:{lat:38.28,lon:-0.56},
+  TFS:{lat:28.04,lon:-16.57}, LPA:{lat:27.93,lon:-15.39}, BER:{lat:52.37,lon:13.52},
+  HAM:{lat:53.63,lon:10.01}, DUS:{lat:51.29,lon:6.77}, CGN:{lat:50.87,lon:7.14},
+  WAW:{lat:52.17,lon:20.97}, PRG:{lat:50.10,lon:14.26}, BUD:{lat:47.43,lon:19.26},
+  OTP:{lat:44.57,lon:26.09}, SOF:{lat:42.70,lon:23.41}, BEG:{lat:44.82,lon:20.31},
+  ZAG:{lat:45.74,lon:16.07}, SKG:{lat:40.52,lon:22.97}, HER:{lat:35.34,lon:25.18},
+  SAW:{lat:40.90,lon:29.31}, AYT:{lat:36.90,lon:30.80}, ESB:{lat:40.13,lon:32.00},
+  ADB:{lat:38.29,lon:27.16}, TBS:{lat:41.67,lon:44.95}, EVN:{lat:40.15,lon:44.40},
+  GYD:{lat:40.47,lon:50.05}, KBP:{lat:50.34,lon:30.89}, SVO:{lat:55.97,lon:37.41},
+  DME:{lat:55.41,lon:37.91}, LED:{lat:59.80,lon:30.26}, VKO:{lat:55.60,lon:37.27},
+  KEF:{lat:63.99,lon:-22.62}, RKV:{lat:64.13,lon:-21.94},
   // Africa
   JNB:{lat:-26.14,lon:28.25}, CPT:{lat:-33.96,lon:18.60}, NBO:{lat:-1.32,lon:36.93},
-  CAI:{lat:30.12,lon:31.41}, ADD:{lat:8.98,lon:38.80}, MRU:{lat:-20.43,lon:57.68}
+  CAI:{lat:30.12,lon:31.41}, ADD:{lat:8.98,lon:38.80}, MRU:{lat:-20.43,lon:57.68},
+  LOS:{lat:6.58,lon:3.32}, ABJ:{lat:5.26,lon:-3.93}, DKR:{lat:14.74,lon:-17.49},
+  CMN:{lat:33.37,lon:-7.59}, RAK:{lat:31.61,lon:-8.04}, TUN:{lat:36.85,lon:10.23},
+  ALG:{lat:36.69,lon:3.22}, ACC:{lat:5.60,lon:-0.17}, DAR:{lat:-6.88,lon:39.20},
+  EBB:{lat:0.04,lon:32.44}, KGL:{lat:-1.97,lon:30.14}, MPM:{lat:-26.04,lon:32.57},
+  DUR:{lat:-29.61,lon:31.12}, WDH:{lat:-22.48,lon:17.47}, GBE:{lat:-24.56,lon:25.92},
+  HRE:{lat:-17.93,lon:31.09}, LUN:{lat:-15.33,lon:28.45}, BLZ:{lat:-15.68,lon:34.97},
+  TNR:{lat:-18.80,lon:47.48}, SEZ:{lat:-4.67,lon:55.52}, SSH:{lat:27.98,lon:34.39},
+  HRG:{lat:27.18,lon:33.80}, MBA:{lat:-4.03,lon:39.59}, ZNZ:{lat:-6.22,lon:39.22}
 });
 
 function toXY(lon, lat) {
@@ -211,7 +316,7 @@ var pollError = false;
 // Bounds: north_lat, south_lat, west_lon, east_lon
 // ============================================================
 
-var FR24_BOUNDS = '-10,-50,105,185'; // SE Australia + NZ + Pacific
+var FR24_BOUNDS = '15,-55,65,210'; // SE Asia + Australia + NZ + Pacific
 var POLL_MS = 3000;
 var lastPollTime = 0;
 
@@ -348,8 +453,8 @@ var QUAD_TYPES = {
   A380:1, A388:1, A389:1,
   B744:1, B747:1, B748:1, B74S:1, B74R:1,
   A340:1, A342:1, A343:1, A345:1, A346:1,
-  // 4-engine regional jets
-  B461:1, B462:1, B463:1, RJ1H:1, RJ70:1, RJ85:1, A124:1, C17:1
+  // Military / cargo 4-engine
+  A124:1, C17:1
 };
 
 var NARROWBODY_TYPES = {
@@ -368,7 +473,11 @@ var NARROWBODY_TYPES = {
   SU95:1, C919:1, T204:1,
   // Boeing 717 / MD-80/90
   B712:1, MD80:1, MD81:1, MD82:1, MD83:1, MD87:1, MD88:1, MD90:1,
-  // Business jets (narrow-body shape, small)
+  // BAe 146 / Avro RJ (small 4-engine regional)
+  B461:1, B462:1, B463:1, RJ1H:1, RJ70:1, RJ85:1
+};
+
+var BIZJET_TYPES = {
   LJ35:1, LJ40:1, LJ45:1, LJ60:1, LJ70:1, LJ75:1,
   CL30:1, CL35:1, CL60:1, GL5T:1, GL7T:1, GLEX:1,
   C25A:1, C25B:1, C25C:1, C500:1, C510:1, C525:1, C550:1, C560:1, C56X:1, C680:1, C68A:1, C700:1, C750:1,
@@ -427,26 +536,38 @@ var HELI_TYPES = {
 };
 
 function getShapeInfo(acType, alt, vel) {
-  if (HELI_TYPES[acType]) return { shape: 'heli', size: 16 };
-  if (SINGLE_PROP_TYPES[acType]) return { shape: 'turboprop', size: 12 };
-  if (TWIN_PROP_TYPES[acType]) return { shape: 'twinprop', size: 14 };
-  if (QUAD_TYPES[acType]) return { shape: 'quad', size: 24 };
+  if (HELI_TYPES[acType]) return { shape: 'heli', size: 8 };
+  if (SINGLE_PROP_TYPES[acType]) return { shape: 'turboprop', size: 6 };
+  if (BIZJET_TYPES[acType]) return { shape: 'large', size: 6 };
+  if (TWIN_PROP_TYPES[acType]) return { shape: 'twinprop', size: 8 };
+  if (QUAD_TYPES[acType]) return { shape: 'quad', size: 28 };
+  if (acType && acType.substring(0,3) === 'B77') return { shape: 'heavy', size: 26 };
   if (WIDEBODY_TYPES[acType]) return { shape: 'heavy', size: 22 };
   if (NARROWBODY_TYPES[acType]) return { shape: 'heavy', size: 16 };
   // Fallback by altitude/speed for unknown types
-  if (alt > 11000 && vel > 240) return { shape: 'heavy', size: 20 };
-  if (alt > 9000 && vel > 220) return { shape: 'heavy', size: 16 };
-  return { shape: 'large', size: 14 };
+  if (alt > 11000 && vel > 240) return { shape: 'heavy', size: 24 };
+  if (alt > 9000 && vel > 220) return { shape: 'large', size: 16 };
+  return { shape: 'large', size: 8 };
 }
 
-function drawPlane(x, y, hdgDeg, acType, alt, vel) {
+var AU_AIRLINES = {
+  QFA:1, QJE:1, JST:1, VOZ:1, RXA:1, UTY:1, ANO:1, PFY:1, AWK:1, BNZ:1,
+  QLK:1, NWK:1, SFW:1, TGG:1, XFP:1, HZL:1, SHT:1, OZJ:1
+};
+
+function isAustralian(callsign) {
+  if (!callsign || callsign.length < 3) return false;
+  return AU_AIRLINES[callsign.substring(0, 3)] === 1;
+}
+
+function drawPlane(x, y, hdgDeg, acType, alt, vel, color) {
   var ang = hdgDeg * Math.PI / 180;
   var info = getShapeInfo(acType, alt, vel);
 
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(ang);
-  ctx.fillStyle = '#EF9F27';
+  ctx.fillStyle = color || '#EF9F27';
 
   if (info.shape === 'heli') {
     var sc = info.size / 64;
@@ -484,21 +605,21 @@ function drawPlane(x, y, hdgDeg, acType, alt, vel) {
 
 function drawGrid() {
   ctx.lineWidth = 0.5;
-  for (var lon = 110; lon <= 180; lon += 5) {
+  for (var lon = 70; lon <= 210; lon += 5) {
     ctx.beginPath();
     ctx.strokeStyle = (lon % 10 === 0) ? 'rgba(29,158,117,0.10)' : 'rgba(29,158,117,0.05)';
-    for (var la = -50; la <= -5; la += 0.5) {
+    for (var la = -60; la <= 20; la += 0.5) {
       var p = toXY(lon, la);
-      la === -50 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]);
+      la === -60 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]);
     }
     ctx.stroke();
   }
-  for (var lat = -10; lat >= -50; lat -= 5) {
+  for (var lat = 15; lat >= -55; lat -= 5) {
     ctx.beginPath();
     ctx.strokeStyle = (lat % 10 === 0) ? 'rgba(29,158,117,0.10)' : 'rgba(29,158,117,0.05)';
-    for (var lo = 105; lo <= 185; lo += 0.5) {
+    for (var lo = 65; lo <= 215; lo += 0.5) {
       var p2 = toXY(lo, lat);
-      lo === 105 ? ctx.moveTo(p2[0], p2[1]) : ctx.lineTo(p2[0], p2[1]);
+      lo === 65 ? ctx.moveTo(p2[0], p2[1]) : ctx.lineTo(p2[0], p2[1]);
     }
     ctx.stroke();
   }
@@ -630,29 +751,21 @@ function drawTrail(ac) {
   var fromAp = ac.from ? airportDB[ac.from] : null;
   var toAp = ac.to ? airportDB[ac.to] : null;
 
-  // Draw full route as great circle arc
+  // Draw full route as great circle arc (d3 handles antimeridian)
   if (fromAp && toAp) {
     // Origin → current position (solid, brighter)
-    var seg1 = greatCirclePoints(fromAp.lat, fromAp.lon, ac.lat, ac.lon, 40);
     ctx.beginPath();
     ctx.lineWidth = 1.8;
     ctx.strokeStyle = 'rgba(239,159,39,0.35)';
-    for (var i = 0; i < seg1.length; i++) {
-      var p = toXY(seg1[i][1], seg1[i][0]);
-      i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]);
-    }
+    pathGen({type: "LineString", coordinates: [[fromAp.lon, fromAp.lat], [ac.lon, ac.lat]]});
     ctx.stroke();
 
     // Current position → destination (dashed, dimmer)
-    var seg2 = greatCirclePoints(ac.lat, ac.lon, toAp.lat, toAp.lon, 40);
     ctx.beginPath();
     ctx.setLineDash([6, 8]);
     ctx.lineWidth = 1.5;
     ctx.strokeStyle = 'rgba(239,159,39,0.2)';
-    for (var i = 0; i < seg2.length; i++) {
-      var p = toXY(seg2[i][1], seg2[i][0]);
-      i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]);
-    }
+    pathGen({type: "LineString", coordinates: [[ac.lon, ac.lat], [toAp.lon, toAp.lat]]});
     ctx.stroke();
     ctx.setLineDash([]);
 
